@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Para ti 💗</title>
+
+    <!-- Enlace al CSS separado -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- estrellas -->
+    <div class="stars" id="stars"></div>
+
+    <div class="wrap">
+      <section class="card">
+        <div class="header">
+          <div>
+            <h1>Hola, mi amor 💗</h1>
+            <p class="sub">
+              Te hice este rinconcito para que respires un poquito… y te
+              acuerdes de algo:
+              <strong>te amo demasiado</strong> y que todo saldrá bien.
+            </p>
+          </div>
+        </div>
+
+        <div class="buddyArea" id="buddyArea">
+          <div class="buddy" id="buddy">
+            <div class="eye left" id="eyeL"></div>
+            <div class="eye right" id="eyeR"></div>
+
+            <div class="blink" id="blinkL"></div>
+            <div class="blink" id="blinkR" style="right: 74px"></div>
+
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+
+            <div class="mouth" id="mouth"></div>
+            <div class="tag" id="tag">
+              Mira, este soy yo en forma de burbujita jsjsjs ✨
+            </div>
+          </div>
+        </div>
+
+        <div class="note" id="note">
+          <span class="spark"></span>
+          <strong id="noteTitle">Nota bonita #1</strong>
+          <p id="noteText">
+            Si hoy te sientes estresada, aquí te mando un abrazo desde la
+            burbujita.
+          </p>
+        </div>
+
+        <div class="note" id="jokeBox">
+          <span class="spark"></span>
+          <strong id="jokeTitle">Chiste #1</strong>
+          <p id="jokeText">Si una tienda de pan se llama panadería y una de pizza se llama pizzería. Una tienda de queso, qué sería?</p>
+        </div>
+
+        <div class="btnRow">
+          <button class="primary" id="hugBtn">Toca para darme un abrazo</button>
+          <button class="soft" id="noteBtn">🍬 Toca para ver otra notita</button>
+          <button class="soft" id="jokeBtn">😂 Toca para ver otro chiste</button>
+          <button class="ghost" id="starsBtn">✨ Modo estrellitas</button>
+        </div>
+
+        <div class="meter" aria-label="Medidor de estrés">
+          <span id="meterBar"></span>
+        </div>
+
+        <div class="meterLabel">
+          <span
+            >Estrés (solo por hoy): <strong id="stressPct">60%</strong></span
+          >
+          <button
+            class="ghost"
+            id="downBtn"
+            style="padding: 10px 12px; border-radius: 12px"
+          >
+            ⬇️ bajarlo
+          </button>
+        </div>
+      </section>
+
+      <!-- <aside class="card">
+      <div class="header">
+        <div>
+          <h1 style="font-size:clamp(20px,2.6vw,28px)">Mini-cosas que te mereces 🌷</h1>
+          <p class="sub">Pequeños recordatorios que no discuten: solo te cuidan.</p>
+        </div>
+        <div class="pill">🌼 suavecito</div>
+      </div>
+
+      <div class="grid">
+        <div class="mini">
+          <h3>Respira conmigo</h3>
+          <p id="breath">Inhala… 4 • Sostén… 2 • Exhala… 6</p>
+        </div>
+
+        <div class="mini">
+          <h3>Un cumplido real</h3>
+          <p id="compliment">Tu esfuerzo se nota, aunque nadie lo vea.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Botón anti-mundo</h3>
+          <p>Si todo está mucho, vuelve aquí un ratito. Yo te espero. 🧸</p>
+        </div>
+
+        <div class="mini">
+          <h3>Promesita</h3>
+          <p>Esto no resuelve todo… pero sí te recuerda que no estás sola. 💗</p>
+        </div>
+      </div>
+
+      <div class="note" style="margin-top:16px">
+        <strong>Extra tierno:</strong>
+        <p>Haz clic en el compañero rosa o mueve el mouse cerca… se pone más sonriente 😄</p>
+      </div>
+
+      <div class="btnRow">
+        <button class="primary" id="surpriseBtn">🎁 Sorpresita</button>
+        <button class="ghost" id="copyBtn">📋 Copiar mensaje</button>
+      </div>
+
+      <p class="sub" style="margin-top:10px">
+        Tip: personaliza el texto del saludo arriba con su nombre, o cambia “mi amor” por su apodo favorito.
+      </p>
+    </aside> -->
+    </div>
+
+    <!-- JS (lo dejamos aquí mismo para respetar tu estructura de 2 archivos) -->
+    <script>
+      // ---------- fondos (burbujitas) ----------
+      const makeBubbles = () => {
+        const n = 14;
+        for (let i = 0; i < n; i++) {
+          const b = document.createElement("div");
+          b.className = "bubble";
+          b.style.left = Math.random() * 100 + "vw";
+          b.style.bottom = -10 - Math.random() * 20 + "vh";
+          b.style.animationDuration = 10 + Math.random() * 10 + "s";
+          b.style.animationDelay = Math.random() * 6 + "s";
+          b.style.transform = `scale(${0.6 + Math.random() * 1.3})`;
+          document.body.appendChild(b);
+        }
+      };
+      makeBubbles();
+
+      // ---------- estrellas ----------
+      const stars = document.getElementById("stars");
+      for (let i = 0; i < 34; i++) {
+        const s = document.createElement("div");
+        s.className = "star";
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 100 + "%";
+        s.style.animationDelay = Math.random() * 2 + "s";
+        s.style.transform = `scale(${0.8 + Math.random() * 1.2})`;
+        stars.appendChild(s);
+      }
+
+      // ---------- UI refs ----------
+      const buddyArea = document.getElementById("buddyArea");
+      const buddy = document.getElementById("buddy");
+      const mouth = document.getElementById("mouth");
+      const timePill = document.getElementById("timePill");
+
+      const noteTitle = document.getElementById("noteTitle");
+      const noteText = document.getElementById("noteText");
+
+      const hugBtn = document.getElementById("hugBtn");
+      const noteBtn = document.getElementById("noteBtn");
+      const starsBtn = document.getElementById("starsBtn");
+      const downBtn = document.getElementById("downBtn");
+      const meterBar = document.getElementById("meterBar");
+      const stressPct = document.getElementById("stressPct");
+
+      const surpriseBtn = document.getElementById("surpriseBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const breath = document.getElementById("breath");
+      const compliment = document.getElementById("compliment");
+
+      const jokeBtn = document.getElementById("jokeBtn");
+      const jokeTitle = document.getElementById("jokeTitle");
+      const jokeText = document.getElementById("jokeText");
+      const tag = document.getElementById("tag"); // (ya lo tienes en HTML, sirve para mostrar mensajitos)
+
+      // ---------- datos tiernos ----------
+      const notes = [
+        [
+          "Nota bonita #1",
+          "Si hoy te sientes estresada, aquí te mando un abrazo desde la burbujita.",
+        ],
+        [
+          "Nota bonita #2",
+          "No olvides que siempre estaré para ti, preciosa. Te amo mucho. 💗",
+        ],
+        [
+          "Nota bonita #3",
+          "Eres la mejor y sé que tu brillo no se apagará. 🌷",
+        ],
+        [
+          "Nota bonita #4",
+          "Respira. Toma agüita. Y si puedes… una sonrisita chiquita. Ya con eso ganamos. 🧸",
+        ],
+        ["Nota bonita #5", "Tu paz es importante. Yo estoy contigo. ✨"],
+        [
+          "Nota bonita #6",
+          "Hoy no estás sola: tienes mi amor y este mini-guardian de sonrisas. Mi blanquita hermoshaa!",
+        ],
+      ];
+
+      const jokes = [
+        "Si una tienda de pan se llama panadería y una de pizza se llama pizzería. Una tienda de queso, qué sería?",
+        "¿Qué hace una abeja en el gimnasio? ¡Zum-ba!",
+        "¿Qué le dijo un techo a otro? Techo de menos :(",
+        "¿Qué hace una vaca en un terremoto? Leche agitada 🐮",
+        "¿Qué hace un perro con un taladro? Taladrando jeje",
+        "¿Qué le dice el 3 al 30? para ser como yo, tienes que ser sincero.",
+        "¿Sabes por qué no se puede discutir con un DJ? porque siempre te cambia de tema",
+        "¿Sabes qué le regalaron a un niño sin brazos? Ni idea, aún no lo ha abierto xd",
+        "¿Sabes por qué no tiran bombas a África? Porque no tienen blanco.",
+      ];
+
+      const compliments = [
+        "Tu esfuerzo se nota, aunque nadie lo vea.",
+        "Tu forma de querer es preciosa.",
+        "Tú haces que el mundo se sienta más suave.",
+        "Eres admirable, incluso en días difíciles.",
+        "Eres más capaz de lo que te dices cuando te estresas.",
+      ];
+
+      const breaths = [
+        "Inhala… 4 • Sostén… 2 • Exhala… 6",
+        "Inhala… 4 • Exhala… 4 (suavecito)",
+        "Inhala… 3 • Sostén… 2 • Exhala… 5",
+        "Inhala… 5 • Exhala… 7 (soltando tensión)",
+      ];
+
+      let noteIndex = 0;
+
+      // ---------- interacciones ----------
+      function setNote(i) {
+        const [t, p] = notes[i];
+        noteTitle.textContent = t;
+        noteText.textContent = p;
+
+        const box = document.getElementById("note");
+        box.animate(
+          [
+            { transform: "translateY(2px)", opacity: 0.7 },
+            { transform: "translateY(0)", opacity: 1 },
+          ],
+          { duration: 220, easing: "ease-out" }
+        );
+      }
+
+      let jokeIndex = 0;
+
+      function setJoke(i) {
+        if (!jokeTitle || !jokeText) return;
+        jokeTitle.textContent = `Chiste #${i + 1}`;
+        jokeText.textContent = jokes[i];
+
+        const box = document.getElementById("jokeBox");
+        if (box) {
+          box.animate(
+            [
+              { transform: "translateY(2px)", opacity: 0.7 },
+              { transform: "translateY(0)", opacity: 1 },
+            ],
+            { duration: 220, easing: "ease-out" }
+          );
+        }
+      }
+
+      if (jokeBtn) {
+        jokeBtn.addEventListener("click", () => {
+          jokeIndex = (jokeIndex + 1) % jokes.length;
+          setJoke(jokeIndex);
+          popHearts(8);
+          smileBoost();
+        });
+      }
+
+      function popHearts(count = 10) {
+        const rect = buddy.getBoundingClientRect();
+        for (let i = 0; i < count; i++) {
+          const h = document.createElement("div");
+          h.className = "heart";
+          const x = rect.left + rect.width / 2 + (Math.random() * 120 - 60);
+          const y = rect.top + rect.height / 2 + (Math.random() * 60 - 20);
+          h.style.setProperty("--x", x + "px");
+          h.style.setProperty("--y", y + "px");
+          h.textContent = Math.random() > 0.2 ? "💗" : "✨";
+          document.body.appendChild(h);
+          setTimeout(() => h.remove(), 1500);
+        }
+      }
+
+      let stress = 100;
+      function renderStress() {
+        meterBar.style.width = stress + "%";
+        stressPct.textContent = stress + "%";
+      }
+      renderStress();
+
+      function smileBoost() {
+        buddy.style.setProperty("--dx", Math.random() * 6 - 3 + "px");
+        buddy.style.setProperty("--dy", Math.random() * 6 - 3 + "px");
+        mouth.style.setProperty("--smile", 1.15);
+        setTimeout(() => mouth.style.setProperty("--smile", 1), 250);
+      }
+
+      // mouse follow (ojitos + buddy)
+      buddyArea.addEventListener("mousemove", (e) => {
+        const r = buddyArea.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = (e.clientX - cx) / r.width;
+        const dy = (e.clientY - cy) / r.height;
+
+        const lookX = Math.max(-6, Math.min(6, dx * 22));
+        const lookY = Math.max(-4, Math.min(4, dy * 18));
+        buddy.style.setProperty("--lookx", lookX + "px");
+        buddy.style.setProperty("--looky", lookY + "px");
+
+        buddy.style.setProperty("--dx", dx * 10 + "px");
+        buddy.style.setProperty("--dy", dy * 8 + "px");
+      });
+
+      buddyArea.addEventListener("mouseleave", () => {
+        buddy.style.setProperty("--lookx", "0px");
+        buddy.style.setProperty("--looky", "0px");
+        buddy.style.setProperty("--dx", "0px");
+        buddy.style.setProperty("--dy", "0px");
+      });
+
+      // parpadeo suave
+      function blink() {
+        const b1 = document.getElementById("blinkL");
+        const b2 = document.getElementById("blinkR");
+        b1.style.opacity = 1;
+        b2.style.opacity = 1;
+        document.getElementById("eyeL").style.opacity = 0;
+        document.getElementById("eyeR").style.opacity = 0;
+        setTimeout(() => {
+          b1.style.opacity = 0;
+          b2.style.opacity = 0;
+          document.getElementById("eyeL").style.opacity = 1;
+          document.getElementById("eyeR").style.opacity = 1;
+        }, 120);
+      }
+      setInterval(() => {
+        if (Math.random() > 0.55) blink();
+      }, 1700);
+
+      // clicks
+      buddy.addEventListener("click", () => {
+        popHearts(12);
+        smileBoost();
+        compliment.textContent =
+          compliments[Math.floor(Math.random() * compliments.length)];
+      });
+
+      hugBtn.addEventListener("click", () => {
+        popHearts(16);
+        smileBoost();
+        timePill.textContent = "🫶 abrazo recibido (apretadito)";
+        setTimeout(
+          () => (timePill.textContent = "🕯️ un abrazo en 3… 2… 1…"),
+          1500
+        );
+        stress = Math.max(5, stress - 8);
+        renderStress();
+      });
+
+      noteBtn.addEventListener("click", () => {
+        noteIndex = (noteIndex + 1) % notes.length;
+        setNote(noteIndex);
+        popHearts(6);
+      });
+
+      starsBtn.addEventListener("click", () => {
+        stars.classList.toggle("on");
+        starsBtn.textContent = stars.classList.contains("on")
+          ? "🌙 Quitar estrellitas"
+          : "✨ Modo estrellitas";
+        popHearts(8);
+      });
+
+      downBtn.addEventListener("click", () => {
+        stress = Math.max(0, stress - 12);
+        renderStress();
+        breath.textContent =
+          breaths[Math.floor(Math.random() * breaths.length)];
+        smileBoost();
+        popHearts(8);
+      });
+
+      surpriseBtn.addEventListener("click", () => {
+        popHearts(22);
+        setNote(Math.floor(Math.random() * notes.length));
+        compliment.textContent =
+          compliments[Math.floor(Math.random() * compliments.length)];
+        breath.textContent =
+          breaths[Math.floor(Math.random() * breaths.length)];
+        buddy.animate(
+          [
+            { transform: "translate(0,0) scale(1)" },
+            { transform: "translate(0,-8px) scale(1.03)" },
+            { transform: "translate(0,0) scale(1)" },
+          ],
+          { duration: 520, easing: "ease-in-out" }
+        );
+      });
+
+      copyBtn.addEventListener("click", async () => {
+        const msg = `Para ti 💗\n\n${noteText.textContent}\n\n(Te amo y estoy contigo.)`;
+        try {
+          await navigator.clipboard.writeText(msg);
+          timePill.textContent = "📋 mensaje copiado (con cariño)";
+          setTimeout(
+            () => (timePill.textContent = "🕯️ un abrazo en 3… 2… 1…"),
+            1500
+          );
+        } catch {
+          alert(msg);
+        }
+      });
+
+      // nota inicial
+      setNote(0);
+      setJoke(0);
+    </script>
+  </body>
+</html>
